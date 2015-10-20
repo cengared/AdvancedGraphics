@@ -32,7 +32,9 @@ public class CameraControl : MonoBehaviour {
 		Debug.DrawRay(transform.position, fwd*100, Color.green);
 
 		RaycastHit hit;
-		if (Physics.Raycast(transform.position, fwd, hit)
-		    string 
+		//if (Physics.Raycast(transform.position, fwd, hit)
+
+
 	}
 }
+
