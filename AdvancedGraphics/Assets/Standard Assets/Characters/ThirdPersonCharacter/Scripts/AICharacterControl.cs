@@ -13,6 +13,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		public Transform[] waypoints;
 		private int destination;
 		private bool firstMove = true;
+		public bool interrupt = false;
 
         // Use this for initialization
         private void Start()
@@ -37,7 +38,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             if (target != null)
             {
-
                 agent.SetDestination(target.position);
                 // use the values to move the character
                 character.Move(agent.desiredVelocity, false, false);
@@ -57,7 +57,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 // We still need to call the character's move function, but we send zeroed input as the move param.
                 character.Move(Vector3.zero, false, false);
             }
-
+			Transform oldTarget = target;
+			if (interrupt) {
+				GameObject g = GameObject.Find ("Player");
+				target = g.transform;
+			} else
+				SetTarget (oldTarget);
         }
 
 
@@ -65,5 +70,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             this.target = target;
         }
+
+		public void setInterrupt(bool b) {
+			interrupt = b;
+		}
+
+		public bool getInterrupt() {
+			return interrupt;
+		}
     }
 }
